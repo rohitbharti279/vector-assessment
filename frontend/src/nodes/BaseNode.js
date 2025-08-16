@@ -96,7 +96,7 @@ export const BaseNode = ({
                 ) : (
                   <input
                     type={control.type || 'text'}
-                    value={state[control.id] || control.defaultValue || ''}
+                    value={state[control.id] !== undefined ? state[control.id] : control.defaultValue}
                     onChange={e => handleChange(control.id, e.target.value)}
                     className="rounded-md bg-[#232946] border border-blue-400 text-white px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
