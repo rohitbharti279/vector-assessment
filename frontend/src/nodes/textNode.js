@@ -54,6 +54,7 @@ export const TextNode = ({ id, data }) => {
           type="target"
           position={Position.Left}
           id={`${id}-${variable}`}
+          title={variable}
           style={{
             top: `${((idx + 1) * 100) / (variables.length + 1)}%`,
             background: '#facc15',
