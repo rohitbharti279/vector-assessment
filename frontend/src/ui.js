@@ -10,16 +10,27 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
+import { MathNode } from './nodes/MathNode';
+import { ConditionalNode } from './nodes/ConditionalNode';
+import { ApiNode } from './nodes/ApiNode';
+import { TimerNode } from './nodes/TimerNode';
+import { MergeNode } from './nodes/MergeNode';
 
 import 'reactflow/dist/style.css';
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
+
 const nodeTypes = {
   customInput: InputNode,
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
+  math: MathNode,
+  conditional: ConditionalNode,
+  api: ApiNode,
+  timer: TimerNode,
+  merge: MergeNode,
 };
 
 const selector = (state) => ({
@@ -90,7 +101,7 @@ export const PipelineUI = () => {
 
     return (
         <>
-        <div ref={reactFlowWrapper} style={{width: '100wv', height: '70vh'}}>
+        <div ref={reactFlowWrapper} style={{width: '100vw', height: '70vh'}}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -103,7 +114,7 @@ export const PipelineUI = () => {
                 nodeTypes={nodeTypes}
                 proOptions={proOptions}
                 snapGrid={[gridSize, gridSize]}
-                connectionLineType='smoothstep'
+                connectionLineType="smoothstep"
             >
                 <Background color="#aaa" gap={gridSize} />
                 <Controls />
