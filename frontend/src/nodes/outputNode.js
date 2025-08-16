@@ -1,5 +1,4 @@
-// outputNode.js
-
+// src/nodes/outputNode.js
 import { BaseNode } from './BaseNode';
 
 export const OutputNode = ({ id, data }) => {

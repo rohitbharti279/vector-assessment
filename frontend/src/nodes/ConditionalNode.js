@@ -14,5 +14,19 @@ export const ConditionalNode = ({ id, data }) => (
     outputs={[
       { id: 'output' }
     ]}
+    controls={[
+      {
+        id: 'strict',
+        label: 'Strict Mode',
+        type: 'checkbox',
+        defaultValue: false
+      },
+      {
+        id: 'defaultValue',
+        label: 'Default Value',
+        type: 'text',
+        defaultValue: 'null'
+      }
+    ]}
   />
 );

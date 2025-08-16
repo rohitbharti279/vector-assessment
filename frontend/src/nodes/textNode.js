@@ -1,5 +1,4 @@
-// textNode.js
-
+// src/nodes/textNode.js
 import { BaseNode } from './BaseNode';
 
 export const TextNode = ({ id, data }) => {
