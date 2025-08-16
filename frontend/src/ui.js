@@ -116,7 +116,6 @@ export const PipelineUI = () => {
             proOptions={proOptions}
             snapGrid={[gridSize, gridSize]}
             connectionLineType="smoothstep"
-            isValidConnection={() => true}
           >
             <Background color="#3b82f6" gap={gridSize} />
             <Controls />

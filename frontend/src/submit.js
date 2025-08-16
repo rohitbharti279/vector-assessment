@@ -14,6 +14,7 @@ export const SubmitButton = () => {
                 body: JSON.stringify({ nodes, edges }),
             });
             const data = await response.json();
+            // console.log('Pipeline analysis:', data);
             alert(
                 `Pipeline Analysis:\n\n` +
                 `Number of Nodes: ${data.num_nodes}\n` +

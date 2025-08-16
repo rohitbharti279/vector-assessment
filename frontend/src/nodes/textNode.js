@@ -3,17 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Handle, Position } from 'reactflow';
 import { useStore } from '../store';
-
-// Helper to extract unique valid JS variable names in double curly brackets
-const extractVariables = (text) => {
-  const regex = /\{\{\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\}\}/g;
-  const vars = new Set();
-  let match;
-  while ((match = regex.exec(text))) {
-    vars.add(match[1]);
-  }
-  return Array.from(vars);
-};
+import { extractVariables } from '../utils/textUtils';
 
 export const TextNode = ({ id, data }) => {
   const [text, setText] = useState(data?.text || '');
