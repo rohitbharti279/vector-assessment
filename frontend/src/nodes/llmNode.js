@@ -4,14 +4,18 @@ import { BaseNode } from './BaseNode';
 export const LLMNode = ({ id, data }) => (
   <BaseNode
     id={id}
-    data={data}
+    data={{
+      ...data,
+      subtitle: "Language Model",
+      description: "Processes text inputs and generates responses"
+    }}
     title="LLM"
     inputs={[
-      { id: 'system' },
-      { id: 'prompt' }
+      { id: 'system', label: 'System' },
+      { id: 'prompt', label: 'Prompt' }
     ]}
     outputs={[
-      { id: 'response' }
+      { id: 'response', label: 'Response' }
     ]}
     controls={[
       {

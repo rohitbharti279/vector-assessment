@@ -22,6 +22,12 @@ export const ConditionalNode = ({ id, data }) => (
         defaultValue: false
       },
       {
+        id: 'negate',
+        label: 'Negate Condition',
+        type: 'checkbox',
+        defaultValue: false
+      },
+      {
         id: 'defaultValue',
         label: 'Default Value',
         type: 'text',
