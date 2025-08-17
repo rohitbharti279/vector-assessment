@@ -1,6 +1,9 @@
 // src/nodes/BaseNode.js
+
 import { Handle, Position } from 'reactflow';
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const BaseNode = ({
   id,
@@ -13,18 +16,24 @@ export const BaseNode = ({
 }) => {
   const [state, setState] = useState(data || {});
 
-  const handleChange = (key, value) => {
+  const handleChange = (key, value, type) => {
     setState(prev => ({ ...prev, [key]: value }));
+    if (type === 'checkbox' || type === 'select' || type === 'range') {
+      toast.info(`${title}: ${key} set to ${value}`, {
+        autoClose: 4000,
+      });
+    }
   };
 
   const defaultHeight = 80;
   const dynamicHeight = defaultHeight + (controls.length * 36);
 
   return (
-    <div
-      className="relative flex flex-col rounded-xl shadow-lg border border-[#3b82f6] bg-gradient-to-br from-[#181f2a] to-[#232946] text-white px-4 py-3 min-w-[220px]"
-      style={{ width: defaultWidth, minHeight: dynamicHeight }}
-    >
+    <>
+      <div
+        className="relative flex flex-col rounded-xl shadow-lg border border-[#3b82f6] bg-gradient-to-br from-[#181f2a] to-[#232946] text-white px-4 py-3 min-w-[220px]"
+        style={{ width: defaultWidth, minHeight: dynamicHeight }}
+      >
       {/* Input Handles */}
       {inputs.map((input, index) => (
         <Handle
@@ -54,7 +63,7 @@ export const BaseNode = ({
                 <input
                   type="checkbox"
                   checked={!!state[control.id]}
-                  onChange={e => handleChange(control.id, e.target.checked)}
+                  onChange={e => handleChange(control.id, e.target.checked, 'checkbox')}
                   className="rounded border-blue-400 text-blue-500 focus:ring-blue-500 mt-0.5"
                 />
                 <label className="text-xs text-blue-200 font-medium select-none cursor-pointer">
@@ -70,7 +79,7 @@ export const BaseNode = ({
                   <select
                     className="rounded-md bg-[#232946] border border-blue-400 text-white px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={state[control.id] || control.defaultValue}
-                    onChange={e => handleChange(control.id, e.target.value)}
+                    onChange={e => handleChange(control.id, e.target.value, 'select')}
                   >
                     {control.options.map(option => (
                       <option key={option.value} value={option.value} className="bg-[#232946] text-white">
@@ -86,7 +95,7 @@ export const BaseNode = ({
                       max={control.max}
                       step={control.step}
                       value={state[control.id] || control.defaultValue}
-                      onChange={e => handleChange(control.id, e.target.value)}
+                      onChange={e => handleChange(control.id, e.target.value, 'range')}
                       className="w-full accent-blue-500"
                     />
                     <span className="text-xs text-blue-200 ml-2">
@@ -97,7 +106,7 @@ export const BaseNode = ({
                   <input
                     type={control.type || 'text'}
                     value={state[control.id] !== undefined ? state[control.id] : control.defaultValue}
-                    onChange={e => handleChange(control.id, e.target.value)}
+                    onChange={e => handleChange(control.id, e.target.value, control.type)}
                     className="rounded-md bg-[#232946] border border-blue-400 text-white px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 )}
@@ -119,6 +128,7 @@ export const BaseNode = ({
           style={{ top: `${((index + 1) * 100) / (outputs.length + 1)}%`, background: '#3b82f6', border: '2px solid #fff', width: 12, height: 12 }}
         />
       ))}
-    </div>
+      </div>
+    </>
   );
 };

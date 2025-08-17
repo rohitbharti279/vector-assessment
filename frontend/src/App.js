@@ -2,6 +2,7 @@ import { PipelineToolbar } from './toolbar';
 import { PipelineUI } from './ui';
 import { SubmitButton } from './submit';
 import logo from './assets/vectorshift_logo.png';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <footer className="bg-gradient-to-br from-[#10172a] to-[#1c2536] p-4 border-t border-[#232946]">
         <SubmitButton />
       </footer>
+      <ToastContainer position="top-right" />
     </div>
   );
 }
