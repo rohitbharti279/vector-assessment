@@ -62,8 +62,8 @@ export const TextNode = ({ id, data }) => {
       <div className="text-xs text-blue-100 mb-1">A node for static or templated text. Use <span className='text-yellow-300'>{'{{variable}}'}</span> to add variables.</div>
 
       {/* Textarea Control */}
-      <div className="flex flex-col gap-2 mt-1">
-        <label className="text-xs text-blue-200 mb-0.5 font-medium">Text</label>
+      <div className="flex flex-col gap-1 before: mt-1">
+        <label className="text-xs text-blue-200 font-medium">Text</label>
         <textarea
           ref={textareaRef}
           className="rounded-md bg-[#232946] border border-blue-400 text-white px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
