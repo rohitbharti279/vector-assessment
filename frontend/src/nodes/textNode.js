@@ -1,20 +1,20 @@
 // src/nodes/textNode.js
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Handle, Position } from 'reactflow';
 import { useStore } from '../store';
 import { extractVariables } from '../utils/textUtils';
 
 export const TextNode = ({ id, data }) => {
   const [text, setText] = useState(data?.text || '');
-  const [variables, setVariables] = useState(() => extractVariables(data?.text || ''));
+  // Memoize variable extraction for performance
+  const variables = useMemo(() => extractVariables(text), [text]);
   const [dimensions, setDimensions] = useState({ width: 240, height: 80 });
   const textareaRef = useRef(null);
   const updateNodeField = useStore((state) => state.updateNodeField);
 
   // Update variables and node field when text changes
   useEffect(() => {
-    setVariables(extractVariables(text));
     updateNodeField(id, 'text', text);
   }, [text, id, updateNodeField]);
 
@@ -66,6 +66,7 @@ export const TextNode = ({ id, data }) => {
         <label className="text-xs text-blue-200 font-medium">Text</label>
         <textarea
           ref={textareaRef}
+          aria-label="Text input for node. Use double curly braces {{}} to define variables."
           className="rounded-md bg-[#232946] border border-blue-400 text-white px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
           style={{ minHeight: 40, width: '100%', fontFamily: 'inherit', lineHeight: 1.5 }}
           value={text}
