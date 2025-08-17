@@ -1,6 +1,6 @@
 // draggableNode.js
 
-export const DraggableNode = ({ type, label }) => {
+export const DraggableNode = ({ type, label, icon }) => {
   const onDragStart = (event, nodeType) => {
     const appData = { nodeType }
     event.dataTransfer.setData('application/reactflow', JSON.stringify(appData));
@@ -37,6 +37,7 @@ export const DraggableNode = ({ type, label }) => {
         border border-white/10
       `}
     >
+      {icon}
       {label}
     </div>
   );
